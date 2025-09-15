@@ -16,6 +16,13 @@ import numpy as np
 import altair as alt
 
 
+with st.expander("Diagnóstico de conexión a Google Sheets"):
+    try:
+        client = _get_gspread_client()
+        sh, ws = _open_or_create_sheet(client, SPREADSHEET_ID, SHEET_NAME)
+        st.success(f"Sheets OK → archivo: {sh.title}, hoja: {ws.title}")
+    except Exception as e:
+        st.error(f"Sheets ERROR: {e}")
 
 st.sidebar.caption("Debug")
 st.sidebar.write("Keys en st.secrets:", list(st.secrets.keys()))
