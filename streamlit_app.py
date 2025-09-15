@@ -167,12 +167,12 @@ with tab_registro:
     st.caption("Cada combinación seleccionada de **día–hora** se guarda como una fila en la hoja `formularios`.")
 
     with st.expander("Diagnóstico de conexión a Google Sheets"):
-    try:
-        client = _get_gspread_client()
-        sh, ws = _open_or_create_sheet(client, SPREADSHEET_ID, SHEET_NAME)
-        st.success(f"Sheets OK → archivo: {sh.title}, hoja: {ws.title}")
-    except Exception as e:
-        st.error(f"Sheets ERROR: {e}")
+        try:
+            client = _get_gspread_client()
+            sh, ws = _open_or_create_sheet(client, SPREADSHEET_ID, SHEET_NAME)
+            st.success(f"Sheets OK → archivo: {sh.title}, hoja: {ws.title}")
+        except Exception as e:
+            st.error(f"Sheets ERROR: {e}")
 
 
     with st.form(key="form_registro", clear_on_submit=True):
