@@ -45,18 +45,26 @@ def _norm_placa(s: str) -> str:
 # --------------------------
 def _get_gspread_client():
     from google.oauth2 import service_account
-    import gspread
+    import gspread, json, os
 
-    creds_dict = st.secrets["gcp_service_account"]
     scopes = [
         "https://www.googleapis.com/auth/spreadsheets",
         "https://www.googleapis.com/auth/drive"
     ]
-    credentials = service_account.Credentials.from_service_account_info(
-        creds_dict, scopes=scopes
-    )
-    client = gspread.authorize(credentials)
-    return client
+
+    if "gcp_service_account" in st.secrets:
+        creds_dict = dict(st.secrets["gcp_service_account"])
+        credentials = service_account.Credentials.from_service_account_info(creds_dict, scopes=scopes)
+    elif "GCP_SERVICE_ACCOUNT_JSON" in st.secrets:
+        creds_dict = json.loads(st.secrets["GCP_SERVICE_ACCOUNT_JSON"])
+        credentials = service_account.Credentials.from_service_account_info(creds_dict, scopes=scopes)
+    elif os.getenv("GOOGLE_APPLICATION_CREDENTIALS"):
+        credentials = service_account.Credentials.from_service_account_file(os.environ["GOOGLE_APPLICATION_CREDENTIALS"], scopes=scopes)
+    else:
+        raise KeyError("No se encontraron credenciales. Configure st.secrets['gcp_service_account'] o la variable GOOGLE_APPLICATION_CREDENTIALS.")
+
+    return gspread.authorize(credentials)
+
 
 
 def _open_or_create_sheet(client, spreadsheet_id: str, sheet_name: str):
