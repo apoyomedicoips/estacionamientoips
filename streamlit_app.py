@@ -3,6 +3,12 @@
 # - Registro: guarda filas en Google Sheets (hoja "formularios")
 # - Tablero: consume la misma hoja para métricas y gráficos
 
+
+st.sidebar.caption("Debug")
+st.sidebar.write("Keys en st.secrets:", list(st.secrets.keys()))
+st.sidebar.write("'gcp_service_account' presente:", "gcp_service_account" in st.secrets)
+
+
 import os
 import uuid
 from datetime import datetime
