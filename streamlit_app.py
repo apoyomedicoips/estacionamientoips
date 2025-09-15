@@ -25,6 +25,7 @@ st.set_page_config(page_title="Estacionamiento IPS", page_icon="🚗", layout="w
 SPREADSHEET_ID = "1EjYdRQdPTK5ziw_M1-tjfGUaDx-ayG_onVI2N5IOL80"
 SHEET_NAME = "formularios"
 
+
 # Fallback opcional a CSV público en GitHub (raw) si fallan los permisos de Google
 GITHUB_CSV_RAW_URL = os.environ.get(
     "GH_CSV_RAW_URL",
