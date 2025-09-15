@@ -4,10 +4,6 @@
 # - Tablero: consume la misma hoja para métricas y gráficos
 
 
-st.sidebar.caption("Debug")
-st.sidebar.write("Keys en st.secrets:", list(st.secrets.keys()))
-st.sidebar.write("'gcp_service_account' presente:", "gcp_service_account" in st.secrets)
-
 
 import os
 import uuid
@@ -18,6 +14,13 @@ import streamlit as st
 import pandas as pd
 import numpy as np
 import altair as alt
+
+
+
+st.sidebar.caption("Debug")
+st.sidebar.write("Keys en st.secrets:", list(st.secrets.keys()))
+st.sidebar.write("'gcp_service_account' presente:", "gcp_service_account" in st.secrets)
+
 
 st.set_page_config(page_title="Estacionamiento IPS", page_icon="🚗", layout="wide")
 
